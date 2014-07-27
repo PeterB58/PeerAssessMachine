@@ -1,0 +1,119 @@
+Peer Assessments in Practical Machine Learning
+========================================================
+
+I apologize for this totally unfinished report. I was not able to start work on this up until 3 hours before deadline. My algorithm works as follows: 
+
+1. Use only quantitative variables that have non-missing values and "user" variable
+2. For each user separately, scale the data, and use nearest neighbor to optimize the number of neighbor (based on CV)
+3. Appply this to the testing data.
+
+
+You can see below my exploratory analysis, but the algorithm testing is not quite finish. I will need to submit the prediction results after the soft deadline.
+
+Sorry.
+
+
+```{r Read, cache=T}
+pml.df  <- read.csv("pml-training.csv", stringsAsFactors = FALSE)
+```
+
+You can also embed plots, for example:
+
+#  ```{r fig.width=7, fig.height=6}
+
+```{r Explore, cache=TRUE}
+dim(pml.df)
+pml.df[1,]
+str(pml.df)
+```
+
+
+```{r Explore2, cache=TRUE}
+attach(pml.df)
+hist(X)
+table(user_name)
+```
+
+```{r Explore3, cache=TRUE}
+CountNA <- function(x) sum(is.na(x))
+apply(pml.df,2,CountNA)
+```
+
+
+```{r ReadTest, cache=TRUE}
+pml.test.df  <- read.csv("pml-testing.csv", stringsAsFactors = FALSE)
+Count.v <- apply(pml.test.df,2,CountNA)
+dim(pml.test.df)
+Cond <- ((Count.v>0)|(c(T,F,rep(T,5),rep(F,153))))
+pml.df2 <- pml.df[,!Cond]
+str(pml.df2)
+apply(pml.df2,2,CountNA)
+```
+
+```{r library}
+require(class)
+set.seed(10)
+```
+
+
+```{r Prediction, cache=TRUE}
+k  <-  ncol(pml.df2)
+k
+Predict.f <- function(Test.p=0.1,neib.k=10,User="Name") {
+   Cond.User <- (pml.df2[,1]==User)
+   mat <- pml.df2[Cond.User,]
+   Y  <-  as.factor(mat[,k])
+   X.mat <- mat[,-c(1,k)]
+   X.mat <- scale(X.mat) # should really scale training and then testing the same way, but have not time now 
+   n <- nrow(mat)
+   Ind <- sample(1:n,floor(n*Test.p))
+   train <- X.mat[-Ind,]
+   cl <- Y[-Ind]
+   test <- X.mat[Ind,]
+   Y.pred <- knn(train, test, cl, k = neib.k, l = 0, prob = FALSE, use.all = TRUE)
+   Pred.rate <- sum(Y.pred==Y[Ind])/length(Ind)
+   Pred.rate
+   
+}
+Predict.f(Test.p=0.1,neib.k=10,User="carlitos")
+```
+
+
+```{r Optimize, cache=TRUE}
+pml.test.df2 <- pml.test.df[,!Cond]
+str(pml.test.df2)
+apply(pml.test.df2,2,CountNA)
+dim(pml.test.df2)
+Users.v <- unique(pml.test.df2[,1])
+Users.v
+
+```
+
+```{r Optimize2, cache=TRUE}
+Test.p.val <- 0.1
+neib.k.val <- c(1:10)
+d <- length(neib.k.val)
+m <- length(Users.v)
+m
+Pred.rate.mat <- matrix(0,d,m)
+for (h in 1:m){
+   print(h)
+   for (j in 1:d) {
+      print(h)
+      # browser()
+      Pred.rate.mat[j,h] <- Predict.f(Test.p=Test.p.val, neib.k=neib.k.val[j], User=Users.v[h])
+   }
+}
+Pred.rate.mat
+matplot(neib.k.val,Pred.rate.mat,type="l")
+
+```
+   
+
+Please, cite this paper to refer the WLE dataset
+
+Velloso, E.; Bulling, A.; Gellersen, H.; Ugulino, W.; Fuks, H. Qualitative Activity Recognition of Weight Lifting Exercises. Proceedings of 4th International Conference in Cooperation with SIGCHI (Augmented Human '13) . Stuttgart, Germany: ACM SIGCHI, 2013.
+
+
+
+

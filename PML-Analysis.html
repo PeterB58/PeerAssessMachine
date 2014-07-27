@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Peer Assessments in Practical Machine Learning</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Peer Assessments in Practical Machine Learning</h1>
+
+<p>I apologize for this totally unfinished report. I was not able to start work on this up until 3 hours before deadline. My algorithm works as follows: </p>
+
+<ol>
+<li>Use only quantitative variables that have non-missing values and &ldquo;user&rdquo; variable</li>
+<li>For each user separately, scale the data, and use nearest neighbor to optimize the number of neighbor (based on CV)</li>
+<li>Appply this to the testing data.</li>
+</ol>
+
+<p>You can see below my exploratory analysis, but the algorithm testing is not quite finish. I will need to submit the prediction results after the soft deadline.</p>
+
+<p>Sorry.</p>
+
+<pre><code class="r">pml.df  &lt;- read.csv(&quot;pml-training.csv&quot;, stringsAsFactors = FALSE)
+</code></pre>
+
+<p>You can also embed plots, for example:</p>
+
+<h1>&ldquo;{r fig.width=7, fig.height=6}</h1>
+
+<pre><code class="r">dim(pml.df)
+</code></pre>
+
+<pre><code>## [1] 19622   160
+</code></pre>
+
+<pre><code class="r">pml.df[1,]
+</code></pre>
+
+<pre><code>##   X user_name raw_timestamp_part_1 raw_timestamp_part_2   cvtd_timestamp
+## 1 1  carlitos           1323084231               788290 05/12/2011 11:23
+##   new_window num_window roll_belt pitch_belt yaw_belt total_accel_belt
+## 1         no         11      1.41       8.07    -94.4                3
+##   kurtosis_roll_belt kurtosis_picth_belt kurtosis_yaw_belt
+## 1                                                         
+##   skewness_roll_belt skewness_roll_belt.1 skewness_yaw_belt max_roll_belt
+## 1                                                                      NA
+##   max_picth_belt max_yaw_belt min_roll_belt min_pitch_belt min_yaw_belt
+## 1             NA                         NA             NA             
+##   amplitude_roll_belt amplitude_pitch_belt amplitude_yaw_belt
+## 1                  NA                   NA                   
+##   var_total_accel_belt avg_roll_belt stddev_roll_belt var_roll_belt
+## 1                   NA            NA               NA            NA
+##   avg_pitch_belt stddev_pitch_belt var_pitch_belt avg_yaw_belt
+## 1             NA                NA             NA           NA
+##   stddev_yaw_belt var_yaw_belt gyros_belt_x gyros_belt_y gyros_belt_z
+## 1              NA           NA            0            0        -0.02
+##   accel_belt_x accel_belt_y accel_belt_z magnet_belt_x magnet_belt_y
+## 1          -21            4           22            -3           599
+##   magnet_belt_z roll_arm pitch_arm yaw_arm total_accel_arm var_accel_arm
+## 1          -313     -128      22.5    -161              34            NA
+##   avg_roll_arm stddev_roll_arm var_roll_arm avg_pitch_arm stddev_pitch_arm
+## 1           NA              NA           NA            NA               NA
+##   var_pitch_arm avg_yaw_arm stddev_yaw_arm var_yaw_arm gyros_arm_x
+## 1            NA          NA             NA          NA           0
+##   gyros_arm_y gyros_arm_z accel_arm_x accel_arm_y accel_arm_z magnet_arm_x
+## 1           0       -0.02        -288         109        -123         -368
+##   magnet_arm_y magnet_arm_z kurtosis_roll_arm kurtosis_picth_arm
+## 1          337          516                                     
+##   kurtosis_yaw_arm skewness_roll_arm skewness_pitch_arm skewness_yaw_arm
+## 1                                                                       
+##   max_roll_arm max_picth_arm max_yaw_arm min_roll_arm min_pitch_arm
+## 1           NA            NA          NA           NA            NA
+##   min_yaw_arm amplitude_roll_arm amplitude_pitch_arm amplitude_yaw_arm
+## 1          NA                 NA                  NA                NA
+##   roll_dumbbell pitch_dumbbell yaw_dumbbell kurtosis_roll_dumbbell
+## 1         13.05         -70.49       -84.87                       
+##   kurtosis_picth_dumbbell kurtosis_yaw_dumbbell skewness_roll_dumbbell
+## 1                                                                     
+##   skewness_pitch_dumbbell skewness_yaw_dumbbell max_roll_dumbbell
+## 1                                                              NA
+##   max_picth_dumbbell max_yaw_dumbbell min_roll_dumbbell min_pitch_dumbbell
+## 1                 NA                                 NA                 NA
+##   min_yaw_dumbbell amplitude_roll_dumbbell amplitude_pitch_dumbbell
+## 1                                       NA                       NA
+##   amplitude_yaw_dumbbell total_accel_dumbbell var_accel_dumbbell
+## 1                                          37                 NA
+##   avg_roll_dumbbell stddev_roll_dumbbell var_roll_dumbbell
+## 1                NA                   NA                NA
+##   avg_pitch_dumbbell stddev_pitch_dumbbell var_pitch_dumbbell
+## 1                 NA                    NA                 NA
+##   avg_yaw_dumbbell stddev_yaw_dumbbell var_yaw_dumbbell gyros_dumbbell_x
+## 1               NA                  NA               NA                0
+##   gyros_dumbbell_y gyros_dumbbell_z accel_dumbbell_x accel_dumbbell_y
+## 1            -0.02                0             -234               47
+##   accel_dumbbell_z magnet_dumbbell_x magnet_dumbbell_y magnet_dumbbell_z
+## 1             -271              -559               293               -65
+##   roll_forearm pitch_forearm yaw_forearm kurtosis_roll_forearm
+## 1         28.4         -63.9        -153                      
+##   kurtosis_picth_forearm kurtosis_yaw_forearm skewness_roll_forearm
+## 1                                                                  
+##   skewness_pitch_forearm skewness_yaw_forearm max_roll_forearm
+## 1                                                           NA
+##   max_picth_forearm max_yaw_forearm min_roll_forearm min_pitch_forearm
+## 1                NA                               NA                NA
+##   min_yaw_forearm amplitude_roll_forearm amplitude_pitch_forearm
+## 1                                     NA                      NA
+##   amplitude_yaw_forearm total_accel_forearm var_accel_forearm
+## 1                                        36                NA
+##   avg_roll_forearm stddev_roll_forearm var_roll_forearm avg_pitch_forearm
+## 1               NA                  NA               NA                NA
+##   stddev_pitch_forearm var_pitch_forearm avg_yaw_forearm
+## 1                   NA                NA              NA
+##   stddev_yaw_forearm var_yaw_forearm gyros_forearm_x gyros_forearm_y
+## 1                 NA              NA            0.03               0
+##   gyros_forearm_z accel_forearm_x accel_forearm_y accel_forearm_z
+## 1           -0.02             192             203            -215
+##   magnet_forearm_x magnet_forearm_y magnet_forearm_z classe
+## 1              -17              654              476      A
+</code></pre>
+
+<pre><code class="r">str(pml.df)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    19622 obs. of  160 variables:
+##  $ X                       : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ user_name               : chr  &quot;carlitos&quot; &quot;carlitos&quot; &quot;carlitos&quot; &quot;carlitos&quot; ...
+##  $ raw_timestamp_part_1    : int  1323084231 1323084231 1323084231 1323084232 1323084232 1323084232 1323084232 1323084232 1323084232 1323084232 ...
+##  $ raw_timestamp_part_2    : int  788290 808298 820366 120339 196328 304277 368296 440390 484323 484434 ...
+##  $ cvtd_timestamp          : chr  &quot;05/12/2011 11:23&quot; &quot;05/12/2011 11:23&quot; &quot;05/12/2011 11:23&quot; &quot;05/12/2011 11:23&quot; ...
+##  $ new_window              : chr  &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; ...
+##  $ num_window              : int  11 11 11 12 12 12 12 12 12 12 ...
+##  $ roll_belt               : num  1.41 1.41 1.42 1.48 1.48 1.45 1.42 1.42 1.43 1.45 ...
+##  $ pitch_belt              : num  8.07 8.07 8.07 8.05 8.07 8.06 8.09 8.13 8.16 8.17 ...
+##  $ yaw_belt                : num  -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 ...
+##  $ total_accel_belt        : int  3 3 3 3 3 3 3 3 3 3 ...
+##  $ kurtosis_roll_belt      : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ kurtosis_picth_belt     : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ kurtosis_yaw_belt       : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_roll_belt      : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_roll_belt.1    : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_yaw_belt       : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ max_roll_belt           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ max_picth_belt          : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ max_yaw_belt            : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ min_roll_belt           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ min_pitch_belt          : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ min_yaw_belt            : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ amplitude_roll_belt     : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ amplitude_pitch_belt    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ amplitude_yaw_belt      : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ var_total_accel_belt    : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ avg_roll_belt           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ stddev_roll_belt        : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ var_roll_belt           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ avg_pitch_belt          : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ stddev_pitch_belt       : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ var_pitch_belt          : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ avg_yaw_belt            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ stddev_yaw_belt         : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ var_yaw_belt            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ gyros_belt_x            : num  0 0.02 0 0.02 0.02 0.02 0.02 0.02 0.02 0.03 ...
+##  $ gyros_belt_y            : num  0 0 0 0 0.02 0 0 0 0 0 ...
+##  $ gyros_belt_z            : num  -0.02 -0.02 -0.02 -0.03 -0.02 -0.02 -0.02 -0.02 -0.02 0 ...
+##  $ accel_belt_x            : int  -21 -22 -20 -22 -21 -21 -22 -22 -20 -21 ...
+##  $ accel_belt_y            : int  4 4 5 3 2 4 3 4 2 4 ...
+##  $ accel_belt_z            : int  22 22 23 21 24 21 21 21 24 22 ...
+##  $ magnet_belt_x           : int  -3 -7 -2 -6 -6 0 -4 -2 1 -3 ...
+##  $ magnet_belt_y           : int  599 608 600 604 600 603 599 603 602 609 ...
+##  $ magnet_belt_z           : int  -313 -311 -305 -310 -302 -312 -311 -313 -312 -308 ...
+##  $ roll_arm                : num  -128 -128 -128 -128 -128 -128 -128 -128 -128 -128 ...
+##  $ pitch_arm               : num  22.5 22.5 22.5 22.1 22.1 22 21.9 21.8 21.7 21.6 ...
+##  $ yaw_arm                 : num  -161 -161 -161 -161 -161 -161 -161 -161 -161 -161 ...
+##  $ total_accel_arm         : int  34 34 34 34 34 34 34 34 34 34 ...
+##  $ var_accel_arm           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ avg_roll_arm            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ stddev_roll_arm         : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ var_roll_arm            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ avg_pitch_arm           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ stddev_pitch_arm        : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ var_pitch_arm           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ avg_yaw_arm             : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ stddev_yaw_arm          : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ var_yaw_arm             : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ gyros_arm_x             : num  0 0.02 0.02 0.02 0 0.02 0 0.02 0.02 0.02 ...
+##  $ gyros_arm_y             : num  0 -0.02 -0.02 -0.03 -0.03 -0.03 -0.03 -0.02 -0.03 -0.03 ...
+##  $ gyros_arm_z             : num  -0.02 -0.02 -0.02 0.02 0 0 0 0 -0.02 -0.02 ...
+##  $ accel_arm_x             : int  -288 -290 -289 -289 -289 -289 -289 -289 -288 -288 ...
+##  $ accel_arm_y             : int  109 110 110 111 111 111 111 111 109 110 ...
+##  $ accel_arm_z             : int  -123 -125 -126 -123 -123 -122 -125 -124 -122 -124 ...
+##  $ magnet_arm_x            : int  -368 -369 -368 -372 -374 -369 -373 -372 -369 -376 ...
+##  $ magnet_arm_y            : int  337 337 344 344 337 342 336 338 341 334 ...
+##  $ magnet_arm_z            : int  516 513 513 512 506 513 509 510 518 516 ...
+##  $ kurtosis_roll_arm       : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ kurtosis_picth_arm      : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ kurtosis_yaw_arm        : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_roll_arm       : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_pitch_arm      : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_yaw_arm        : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ max_roll_arm            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ max_picth_arm           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ max_yaw_arm             : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ min_roll_arm            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ min_pitch_arm           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ min_yaw_arm             : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ amplitude_roll_arm      : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ amplitude_pitch_arm     : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ amplitude_yaw_arm       : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ roll_dumbbell           : num  13.1 13.1 12.9 13.4 13.4 ...
+##  $ pitch_dumbbell          : num  -70.5 -70.6 -70.3 -70.4 -70.4 ...
+##  $ yaw_dumbbell            : num  -84.9 -84.7 -85.1 -84.9 -84.9 ...
+##  $ kurtosis_roll_dumbbell  : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ kurtosis_picth_dumbbell : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ kurtosis_yaw_dumbbell   : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_roll_dumbbell  : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_pitch_dumbbell : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ skewness_yaw_dumbbell   : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ max_roll_dumbbell       : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ max_picth_dumbbell      : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ max_yaw_dumbbell        : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ min_roll_dumbbell       : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ min_pitch_dumbbell      : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ min_yaw_dumbbell        : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ amplitude_roll_dumbbell : num  NA NA NA NA NA NA NA NA NA NA ...
+##   [list output truncated]
+</code></pre>
+
+<pre><code class="r">attach(pml.df)
+hist(X)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk Explore2"/> </p>
+
+<pre><code class="r">table(user_name)
+</code></pre>
+
+<pre><code>## user_name
+##   adelmo carlitos  charles   eurico   jeremy    pedro 
+##     3892     3112     3536     3070     3402     2610
+</code></pre>
+
+<pre><code class="r">CountNA &lt;- function(x) sum(is.na(x))
+apply(pml.df,2,CountNA)
+</code></pre>
+
+<pre><code>##                        X                user_name     raw_timestamp_part_1 
+##                        0                        0                        0 
+##     raw_timestamp_part_2           cvtd_timestamp               new_window 
+##                        0                        0                        0 
+##               num_window                roll_belt               pitch_belt 
+##                        0                        0                        0 
+##                 yaw_belt         total_accel_belt       kurtosis_roll_belt 
+##                        0                        0                        0 
+##      kurtosis_picth_belt        kurtosis_yaw_belt       skewness_roll_belt 
+##                        0                        0                        0 
+##     skewness_roll_belt.1        skewness_yaw_belt            max_roll_belt 
+##                        0                        0                    19216 
+##           max_picth_belt             max_yaw_belt            min_roll_belt 
+##                    19216                        0                    19216 
+##           min_pitch_belt             min_yaw_belt      amplitude_roll_belt 
+##                    19216                        0                    19216 
+##     amplitude_pitch_belt       amplitude_yaw_belt     var_total_accel_belt 
+##                    19216                        0                    19216 
+##            avg_roll_belt         stddev_roll_belt            var_roll_belt 
+##                    19216                    19216                    19216 
+##           avg_pitch_belt        stddev_pitch_belt           var_pitch_belt 
+##                    19216                    19216                    19216 
+##             avg_yaw_belt          stddev_yaw_belt             var_yaw_belt 
+##                    19216                    19216                    19216 
+##             gyros_belt_x             gyros_belt_y             gyros_belt_z 
+##                        0                        0                        0 
+##             accel_belt_x             accel_belt_y             accel_belt_z 
+##                        0                        0                        0 
+##            magnet_belt_x            magnet_belt_y            magnet_belt_z 
+##                        0                        0                        0 
+##                 roll_arm                pitch_arm                  yaw_arm 
+##                        0                        0                        0 
+##          total_accel_arm            var_accel_arm             avg_roll_arm 
+##                        0                    19216                    19216 
+##          stddev_roll_arm             var_roll_arm            avg_pitch_arm 
+##                    19216                    19216                    19216 
+##         stddev_pitch_arm            var_pitch_arm              avg_yaw_arm 
+##                    19216                    19216                    19216 
+##           stddev_yaw_arm              var_yaw_arm              gyros_arm_x 
+##                    19216                    19216                        0 
+##              gyros_arm_y              gyros_arm_z              accel_arm_x 
+##                        0                        0                        0 
+##              accel_arm_y              accel_arm_z             magnet_arm_x 
+##                        0                        0                        0 
+##             magnet_arm_y             magnet_arm_z        kurtosis_roll_arm 
+##                        0                        0                        0 
+##       kurtosis_picth_arm         kurtosis_yaw_arm        skewness_roll_arm 
+##                        0                        0                        0 
+##       skewness_pitch_arm         skewness_yaw_arm             max_roll_arm 
+##                        0                        0                    19216 
+##            max_picth_arm              max_yaw_arm             min_roll_arm 
+##                    19216                    19216                    19216 
+##            min_pitch_arm              min_yaw_arm       amplitude_roll_arm 
+##                    19216                    19216                    19216 
+##      amplitude_pitch_arm        amplitude_yaw_arm            roll_dumbbell 
+##                    19216                    19216                        0 
+##           pitch_dumbbell             yaw_dumbbell   kurtosis_roll_dumbbell 
+##                        0                        0                        0 
+##  kurtosis_picth_dumbbell    kurtosis_yaw_dumbbell   skewness_roll_dumbbell 
+##                        0                        0                        0 
+##  skewness_pitch_dumbbell    skewness_yaw_dumbbell        max_roll_dumbbell 
+##                        0                        0                    19216 
+##       max_picth_dumbbell         max_yaw_dumbbell        min_roll_dumbbell 
+##                    19216                        0                    19216 
+##       min_pitch_dumbbell         min_yaw_dumbbell  amplitude_roll_dumbbell 
+##                    19216                        0                    19216 
+## amplitude_pitch_dumbbell   amplitude_yaw_dumbbell     total_accel_dumbbell 
+##                    19216                        0                        0 
+##       var_accel_dumbbell        avg_roll_dumbbell     stddev_roll_dumbbell 
+##                    19216                    19216                    19216 
+##        var_roll_dumbbell       avg_pitch_dumbbell    stddev_pitch_dumbbell 
+##                    19216                    19216                    19216 
+##       var_pitch_dumbbell         avg_yaw_dumbbell      stddev_yaw_dumbbell 
+##                    19216                    19216                    19216 
+##         var_yaw_dumbbell         gyros_dumbbell_x         gyros_dumbbell_y 
+##                    19216                        0                        0 
+##         gyros_dumbbell_z         accel_dumbbell_x         accel_dumbbell_y 
+##                        0                        0                        0 
+##         accel_dumbbell_z        magnet_dumbbell_x        magnet_dumbbell_y 
+##                        0                        0                        0 
+##        magnet_dumbbell_z             roll_forearm            pitch_forearm 
+##                        0                        0                        0 
+##              yaw_forearm    kurtosis_roll_forearm   kurtosis_picth_forearm 
+##                        0                        0                        0 
+##     kurtosis_yaw_forearm    skewness_roll_forearm   skewness_pitch_forearm 
+##                        0                        0                        0 
+##     skewness_yaw_forearm         max_roll_forearm        max_picth_forearm 
+##                        0                    19216                    19216 
+##          max_yaw_forearm         min_roll_forearm        min_pitch_forearm 
+##                        0                    19216                    19216 
+##          min_yaw_forearm   amplitude_roll_forearm  amplitude_pitch_forearm 
+##                        0                    19216                    19216 
+##    amplitude_yaw_forearm      total_accel_forearm        var_accel_forearm 
+##                        0                        0                    19216 
+##         avg_roll_forearm      stddev_roll_forearm         var_roll_forearm 
+##                    19216                    19216                    19216 
+##        avg_pitch_forearm     stddev_pitch_forearm        var_pitch_forearm 
+##                    19216                    19216                    19216 
+##          avg_yaw_forearm       stddev_yaw_forearm          var_yaw_forearm 
+##                    19216                    19216                    19216 
+##          gyros_forearm_x          gyros_forearm_y          gyros_forearm_z 
+##                        0                        0                        0 
+##          accel_forearm_x          accel_forearm_y          accel_forearm_z 
+##                        0                        0                        0 
+##         magnet_forearm_x         magnet_forearm_y         magnet_forearm_z 
+##                        0                        0                        0 
+##                   classe 
+##                        0
+</code></pre>
+
+<pre><code class="r">pml.test.df  &lt;- read.csv(&quot;pml-testing.csv&quot;, stringsAsFactors = FALSE)
+Count.v &lt;- apply(pml.test.df,2,CountNA)
+dim(pml.test.df)
+</code></pre>
+
+<pre><code>## [1]  20 160
+</code></pre>
+
+<pre><code class="r">Cond &lt;- ((Count.v&gt;0)|(c(T,F,rep(T,5),rep(F,153))))
+pml.df2 &lt;- pml.df[,!Cond]
+str(pml.df2)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    19622 obs. of  54 variables:
+##  $ user_name           : chr  &quot;carlitos&quot; &quot;carlitos&quot; &quot;carlitos&quot; &quot;carlitos&quot; ...
+##  $ roll_belt           : num  1.41 1.41 1.42 1.48 1.48 1.45 1.42 1.42 1.43 1.45 ...
+##  $ pitch_belt          : num  8.07 8.07 8.07 8.05 8.07 8.06 8.09 8.13 8.16 8.17 ...
+##  $ yaw_belt            : num  -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 -94.4 ...
+##  $ total_accel_belt    : int  3 3 3 3 3 3 3 3 3 3 ...
+##  $ gyros_belt_x        : num  0 0.02 0 0.02 0.02 0.02 0.02 0.02 0.02 0.03 ...
+##  $ gyros_belt_y        : num  0 0 0 0 0.02 0 0 0 0 0 ...
+##  $ gyros_belt_z        : num  -0.02 -0.02 -0.02 -0.03 -0.02 -0.02 -0.02 -0.02 -0.02 0 ...
+##  $ accel_belt_x        : int  -21 -22 -20 -22 -21 -21 -22 -22 -20 -21 ...
+##  $ accel_belt_y        : int  4 4 5 3 2 4 3 4 2 4 ...
+##  $ accel_belt_z        : int  22 22 23 21 24 21 21 21 24 22 ...
+##  $ magnet_belt_x       : int  -3 -7 -2 -6 -6 0 -4 -2 1 -3 ...
+##  $ magnet_belt_y       : int  599 608 600 604 600 603 599 603 602 609 ...
+##  $ magnet_belt_z       : int  -313 -311 -305 -310 -302 -312 -311 -313 -312 -308 ...
+##  $ roll_arm            : num  -128 -128 -128 -128 -128 -128 -128 -128 -128 -128 ...
+##  $ pitch_arm           : num  22.5 22.5 22.5 22.1 22.1 22 21.9 21.8 21.7 21.6 ...
+##  $ yaw_arm             : num  -161 -161 -161 -161 -161 -161 -161 -161 -161 -161 ...
+##  $ total_accel_arm     : int  34 34 34 34 34 34 34 34 34 34 ...
+##  $ gyros_arm_x         : num  0 0.02 0.02 0.02 0 0.02 0 0.02 0.02 0.02 ...
+##  $ gyros_arm_y         : num  0 -0.02 -0.02 -0.03 -0.03 -0.03 -0.03 -0.02 -0.03 -0.03 ...
+##  $ gyros_arm_z         : num  -0.02 -0.02 -0.02 0.02 0 0 0 0 -0.02 -0.02 ...
+##  $ accel_arm_x         : int  -288 -290 -289 -289 -289 -289 -289 -289 -288 -288 ...
+##  $ accel_arm_y         : int  109 110 110 111 111 111 111 111 109 110 ...
+##  $ accel_arm_z         : int  -123 -125 -126 -123 -123 -122 -125 -124 -122 -124 ...
+##  $ magnet_arm_x        : int  -368 -369 -368 -372 -374 -369 -373 -372 -369 -376 ...
+##  $ magnet_arm_y        : int  337 337 344 344 337 342 336 338 341 334 ...
+##  $ magnet_arm_z        : int  516 513 513 512 506 513 509 510 518 516 ...
+##  $ roll_dumbbell       : num  13.1 13.1 12.9 13.4 13.4 ...
+##  $ pitch_dumbbell      : num  -70.5 -70.6 -70.3 -70.4 -70.4 ...
+##  $ yaw_dumbbell        : num  -84.9 -84.7 -85.1 -84.9 -84.9 ...
+##  $ total_accel_dumbbell: int  37 37 37 37 37 37 37 37 37 37 ...
+##  $ gyros_dumbbell_x    : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ gyros_dumbbell_y    : num  -0.02 -0.02 -0.02 -0.02 -0.02 -0.02 -0.02 -0.02 -0.02 -0.02 ...
+##  $ gyros_dumbbell_z    : num  0 0 0 -0.02 0 0 0 0 0 0 ...
+##  $ accel_dumbbell_x    : int  -234 -233 -232 -232 -233 -234 -232 -234 -232 -235 ...
+##  $ accel_dumbbell_y    : int  47 47 46 48 48 48 47 46 47 48 ...
+##  $ accel_dumbbell_z    : int  -271 -269 -270 -269 -270 -269 -270 -272 -269 -270 ...
+##  $ magnet_dumbbell_x   : int  -559 -555 -561 -552 -554 -558 -551 -555 -549 -558 ...
+##  $ magnet_dumbbell_y   : int  293 296 298 303 292 294 295 300 292 291 ...
+##  $ magnet_dumbbell_z   : num  -65 -64 -63 -60 -68 -66 -70 -74 -65 -69 ...
+##  $ roll_forearm        : num  28.4 28.3 28.3 28.1 28 27.9 27.9 27.8 27.7 27.7 ...
+##  $ pitch_forearm       : num  -63.9 -63.9 -63.9 -63.9 -63.9 -63.9 -63.9 -63.8 -63.8 -63.8 ...
+##  $ yaw_forearm         : num  -153 -153 -152 -152 -152 -152 -152 -152 -152 -152 ...
+##  $ total_accel_forearm : int  36 36 36 36 36 36 36 36 36 36 ...
+##  $ gyros_forearm_x     : num  0.03 0.02 0.03 0.02 0.02 0.02 0.02 0.02 0.03 0.02 ...
+##  $ gyros_forearm_y     : num  0 0 -0.02 -0.02 0 -0.02 0 -0.02 0 0 ...
+##  $ gyros_forearm_z     : num  -0.02 -0.02 0 0 -0.02 -0.03 -0.02 0 -0.02 -0.02 ...
+##  $ accel_forearm_x     : int  192 192 196 189 189 193 195 193 193 190 ...
+##  $ accel_forearm_y     : int  203 203 204 206 206 203 205 205 204 205 ...
+##  $ accel_forearm_z     : int  -215 -216 -213 -214 -214 -215 -215 -213 -214 -215 ...
+##  $ magnet_forearm_x    : int  -17 -18 -18 -16 -17 -9 -18 -9 -16 -22 ...
+##  $ magnet_forearm_y    : num  654 661 658 658 655 660 659 660 653 656 ...
+##  $ magnet_forearm_z    : num  476 473 469 469 473 478 470 474 476 473 ...
+##  $ classe              : chr  &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; ...
+</code></pre>
+
+<pre><code class="r">apply(pml.df2,2,CountNA)
+</code></pre>
+
+<pre><code>##            user_name            roll_belt           pitch_belt 
+##                    0                    0                    0 
+##             yaw_belt     total_accel_belt         gyros_belt_x 
+##                    0                    0                    0 
+##         gyros_belt_y         gyros_belt_z         accel_belt_x 
+##                    0                    0                    0 
+##         accel_belt_y         accel_belt_z        magnet_belt_x 
+##                    0                    0                    0 
+##        magnet_belt_y        magnet_belt_z             roll_arm 
+##                    0                    0                    0 
+##            pitch_arm              yaw_arm      total_accel_arm 
+##                    0                    0                    0 
+##          gyros_arm_x          gyros_arm_y          gyros_arm_z 
+##                    0                    0                    0 
+##          accel_arm_x          accel_arm_y          accel_arm_z 
+##                    0                    0                    0 
+##         magnet_arm_x         magnet_arm_y         magnet_arm_z 
+##                    0                    0                    0 
+##        roll_dumbbell       pitch_dumbbell         yaw_dumbbell 
+##                    0                    0                    0 
+## total_accel_dumbbell     gyros_dumbbell_x     gyros_dumbbell_y 
+##                    0                    0                    0 
+##     gyros_dumbbell_z     accel_dumbbell_x     accel_dumbbell_y 
+##                    0                    0                    0 
+##     accel_dumbbell_z    magnet_dumbbell_x    magnet_dumbbell_y 
+##                    0                    0                    0 
+##    magnet_dumbbell_z         roll_forearm        pitch_forearm 
+##                    0                    0                    0 
+##          yaw_forearm  total_accel_forearm      gyros_forearm_x 
+##                    0                    0                    0 
+##      gyros_forearm_y      gyros_forearm_z      accel_forearm_x 
+##                    0                    0                    0 
+##      accel_forearm_y      accel_forearm_z     magnet_forearm_x 
+##                    0                    0                    0 
+##     magnet_forearm_y     magnet_forearm_z               classe 
+##                    0                    0                    0
+</code></pre>
+
+<pre><code class="r">require(class)
+</code></pre>
+
+<pre><code>## Loading required package: class
+</code></pre>
+
+<pre><code class="r">set.seed(10)
+</code></pre>
+
+<pre><code class="r">k  &lt;-  ncol(pml.df2)
+k
+</code></pre>
+
+<pre><code>## [1] 54
+</code></pre>
+
+<pre><code class="r">Predict.f &lt;- function(Test.p=0.1,neib.k=10,User=&quot;Name&quot;) {
+   Cond.User &lt;- (pml.df2[,1]==User)
+   mat &lt;- pml.df2[Cond.User,]
+   Y  &lt;-  as.factor(mat[,k])
+   X.mat &lt;- mat[,-c(1,k)]
+   X.mat &lt;- scale(X.mat) # should really scale training and then testing the same way, but have not time now 
+   n &lt;- nrow(mat)
+   Ind &lt;- sample(1:n,floor(n*Test.p))
+   train &lt;- X.mat[-Ind,]
+   cl &lt;- Y[-Ind]
+   test &lt;- X.mat[Ind,]
+   Y.pred &lt;- knn(train, test, cl, k = neib.k, l = 0, prob = FALSE, use.all = TRUE)
+   Pred.rate &lt;- sum(Y.pred==Y[Ind])/length(Ind)
+   Pred.rate
+
+}
+Predict.f(Test.p=0.1,neib.k=10,User=&quot;carlitos&quot;)
+</code></pre>
+
+<pre><code>## [1] 0.9678
+</code></pre>
+
+<pre><code class="r">pml.test.df2 &lt;- pml.test.df[,!Cond]
+str(pml.test.df2)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    20 obs. of  54 variables:
+##  $ user_name           : chr  &quot;pedro&quot; &quot;jeremy&quot; &quot;jeremy&quot; &quot;adelmo&quot; ...
+##  $ roll_belt           : num  123 1.02 0.87 125 1.35 -5.92 1.2 0.43 0.93 114 ...
+##  $ pitch_belt          : num  27 4.87 1.82 -41.6 3.33 1.59 4.44 4.15 6.72 22.4 ...
+##  $ yaw_belt            : num  -4.75 -88.9 -88.5 162 -88.6 -87.7 -87.3 -88.5 -93.7 -13.1 ...
+##  $ total_accel_belt    : int  20 4 5 17 3 4 4 4 4 18 ...
+##  $ gyros_belt_x        : num  -0.5 -0.06 0.05 0.11 0.03 0.1 -0.06 -0.18 0.1 0.14 ...
+##  $ gyros_belt_y        : num  -0.02 -0.02 0.02 0.11 0.02 0.05 0 -0.02 0 0.11 ...
+##  $ gyros_belt_z        : num  -0.46 -0.07 0.03 -0.16 0 -0.13 0 -0.03 -0.02 -0.16 ...
+##  $ accel_belt_x        : int  -38 -13 1 46 -8 -11 -14 -10 -15 -25 ...
+##  $ accel_belt_y        : int  69 11 -1 45 4 -16 2 -2 1 63 ...
+##  $ accel_belt_z        : int  -179 39 49 -156 27 38 35 42 32 -158 ...
+##  $ magnet_belt_x       : int  -13 43 29 169 33 31 50 39 -6 10 ...
+##  $ magnet_belt_y       : int  581 636 631 608 566 638 622 635 600 601 ...
+##  $ magnet_belt_z       : int  -382 -309 -312 -304 -418 -291 -315 -305 -302 -330 ...
+##  $ roll_arm            : num  40.7 0 0 -109 76.1 0 0 0 -137 -82.4 ...
+##  $ pitch_arm           : num  -27.8 0 0 55 2.76 0 0 0 11.2 -63.8 ...
+##  $ yaw_arm             : num  178 0 0 -142 102 0 0 0 -167 -75.3 ...
+##  $ total_accel_arm     : int  10 38 44 25 29 14 15 22 34 32 ...
+##  $ gyros_arm_x         : num  -1.65 -1.17 2.1 0.22 -1.96 0.02 2.36 -3.71 0.03 0.26 ...
+##  $ gyros_arm_y         : num  0.48 0.85 -1.36 -0.51 0.79 0.05 -1.01 1.85 -0.02 -0.5 ...
+##  $ gyros_arm_z         : num  -0.18 -0.43 1.13 0.92 -0.54 -0.07 0.89 -0.69 -0.02 0.79 ...
+##  $ accel_arm_x         : int  16 -290 -341 -238 -197 -26 99 -98 -287 -301 ...
+##  $ accel_arm_y         : int  38 215 245 -57 200 130 79 175 111 -42 ...
+##  $ accel_arm_z         : int  93 -90 -87 6 -30 -19 -67 -78 -122 -80 ...
+##  $ magnet_arm_x        : int  -326 -325 -264 -173 -170 396 702 535 -367 -420 ...
+##  $ magnet_arm_y        : int  385 447 474 257 275 176 15 215 335 294 ...
+##  $ magnet_arm_z        : int  481 434 413 633 617 516 217 385 520 493 ...
+##  $ roll_dumbbell       : num  -17.7 54.5 57.1 43.1 -101.4 ...
+##  $ pitch_dumbbell      : num  25 -53.7 -51.4 -30 -53.4 ...
+##  $ yaw_dumbbell        : num  126.2 -75.5 -75.2 -103.3 -14.2 ...
+##  $ total_accel_dumbbell: int  9 31 29 18 4 29 29 29 3 2 ...
+##  $ gyros_dumbbell_x    : num  0.64 0.34 0.39 0.1 0.29 -0.59 0.34 0.37 0.03 0.42 ...
+##  $ gyros_dumbbell_y    : num  0.06 0.05 0.14 -0.02 -0.47 0.8 0.16 0.14 -0.21 0.51 ...
+##  $ gyros_dumbbell_z    : num  -0.61 -0.71 -0.34 0.05 -0.46 1.1 -0.23 -0.39 -0.21 -0.03 ...
+##  $ accel_dumbbell_x    : int  21 -153 -141 -51 -18 -138 -145 -140 0 -7 ...
+##  $ accel_dumbbell_y    : int  -15 155 155 72 -30 166 150 159 25 -20 ...
+##  $ accel_dumbbell_z    : int  81 -205 -196 -148 -5 -186 -190 -191 9 7 ...
+##  $ magnet_dumbbell_x   : int  523 -502 -506 -576 -424 -543 -484 -515 -519 -531 ...
+##  $ magnet_dumbbell_y   : int  -528 388 349 238 252 262 354 350 348 321 ...
+##  $ magnet_dumbbell_z   : int  -56 -36 41 53 312 96 97 53 -32 -164 ...
+##  $ roll_forearm        : num  141 109 131 0 -176 150 155 -161 15.5 13.2 ...
+##  $ pitch_forearm       : num  49.3 -17.6 -32.6 0 -2.16 1.46 34.5 43.6 -63.5 19.4 ...
+##  $ yaw_forearm         : num  156 106 93 0 -47.9 89.7 152 -89.5 -139 -105 ...
+##  $ total_accel_forearm : int  33 39 34 43 24 43 32 47 36 24 ...
+##  $ gyros_forearm_x     : num  0.74 1.12 0.18 1.38 -0.75 -0.88 -0.53 0.63 0.03 0.02 ...
+##  $ gyros_forearm_y     : num  -3.34 -2.78 -0.79 0.69 3.1 4.26 1.8 -0.74 0.02 0.13 ...
+##  $ gyros_forearm_z     : num  -0.59 -0.18 0.28 1.8 0.8 1.35 0.75 0.49 -0.02 -0.07 ...
+##  $ accel_forearm_x     : int  -110 212 154 -92 131 230 -192 -151 195 -212 ...
+##  $ accel_forearm_y     : int  267 297 271 406 -93 322 170 -331 204 98 ...
+##  $ accel_forearm_z     : int  -149 -118 -129 -39 172 -144 -175 -282 -217 -7 ...
+##  $ magnet_forearm_x    : int  -714 -237 -51 -233 375 -300 -678 -109 0 -403 ...
+##  $ magnet_forearm_y    : int  419 791 698 783 -787 800 284 -619 652 723 ...
+##  $ magnet_forearm_z    : int  617 873 783 521 91 884 585 -32 469 512 ...
+##  $ problem_id          : int  1 2 3 4 5 6 7 8 9 10 ...
+</code></pre>
+
+<pre><code class="r">apply(pml.test.df2,2,CountNA)
+</code></pre>
+
+<pre><code>##            user_name            roll_belt           pitch_belt 
+##                    0                    0                    0 
+##             yaw_belt     total_accel_belt         gyros_belt_x 
+##                    0                    0                    0 
+##         gyros_belt_y         gyros_belt_z         accel_belt_x 
+##                    0                    0                    0 
+##         accel_belt_y         accel_belt_z        magnet_belt_x 
+##                    0                    0                    0 
+##        magnet_belt_y        magnet_belt_z             roll_arm 
+##                    0                    0                    0 
+##            pitch_arm              yaw_arm      total_accel_arm 
+##                    0                    0                    0 
+##          gyros_arm_x          gyros_arm_y          gyros_arm_z 
+##                    0                    0                    0 
+##          accel_arm_x          accel_arm_y          accel_arm_z 
+##                    0                    0                    0 
+##         magnet_arm_x         magnet_arm_y         magnet_arm_z 
+##                    0                    0                    0 
+##        roll_dumbbell       pitch_dumbbell         yaw_dumbbell 
+##                    0                    0                    0 
+## total_accel_dumbbell     gyros_dumbbell_x     gyros_dumbbell_y 
+##                    0                    0                    0 
+##     gyros_dumbbell_z     accel_dumbbell_x     accel_dumbbell_y 
+##                    0                    0                    0 
+##     accel_dumbbell_z    magnet_dumbbell_x    magnet_dumbbell_y 
+##                    0                    0                    0 
+##    magnet_dumbbell_z         roll_forearm        pitch_forearm 
+##                    0                    0                    0 
+##          yaw_forearm  total_accel_forearm      gyros_forearm_x 
+##                    0                    0                    0 
+##      gyros_forearm_y      gyros_forearm_z      accel_forearm_x 
+##                    0                    0                    0 
+##      accel_forearm_y      accel_forearm_z     magnet_forearm_x 
+##                    0                    0                    0 
+##     magnet_forearm_y     magnet_forearm_z           problem_id 
+##                    0                    0                    0
+</code></pre>
+
+<pre><code class="r">dim(pml.test.df2)
+</code></pre>
+
+<pre><code>## [1] 20 54
+</code></pre>
+
+<pre><code class="r">Users.v &lt;- unique(pml.test.df2[,1])
+Users.v
+</code></pre>
+
+<pre><code>## [1] &quot;pedro&quot;    &quot;jeremy&quot;   &quot;adelmo&quot;   &quot;eurico&quot;   &quot;carlitos&quot; &quot;charles&quot;
+</code></pre>
+
+<pre><code class="r">Test.p.val &lt;- 0.1
+neib.k.val &lt;- c(1:10)
+d &lt;- length(neib.k.val)
+m &lt;- length(Users.v)
+m
+</code></pre>
+
+<pre><code>## [1] 6
+</code></pre>
+
+<pre><code class="r">Pred.rate.mat &lt;- matrix(0,d,m)
+for (h in 1:m){
+   print(h)
+   for (j in 1:d) {
+      print(h)
+      # browser()
+      Pred.rate.mat[j,h] &lt;- Predict.f(Test.p=Test.p.val, neib.k=neib.k.val[j], User=Users.v[h])
+   }
+}
+</code></pre>
+
+<pre><code>## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 1
+## [1] 2
+## [1] 2
+</code></pre>
+
+<pre><code>## Error: no missing values are allowed
+</code></pre>
+
+<pre><code class="r">Pred.rate.mat
+</code></pre>
+
+<pre><code>##         [,1] [,2] [,3] [,4] [,5] [,6]
+##  [1,] 1.0000    0    0    0    0    0
+##  [2,] 0.9847    0    0    0    0    0
+##  [3,] 1.0000    0    0    0    0    0
+##  [4,] 0.9693    0    0    0    0    0
+##  [5,] 0.9847    0    0    0    0    0
+##  [6,] 0.9693    0    0    0    0    0
+##  [7,] 0.9923    0    0    0    0    0
+##  [8,] 0.9693    0    0    0    0    0
+##  [9,] 0.9655    0    0    0    0    0
+## [10,] 0.9693    0    0    0    0    0
+</code></pre>
+
+<pre><code class="r">matplot(neib.k.val,Pred.rate.mat,type=&quot;l&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk Optimize2"/> </p>
+
+<p>Please, cite this paper to refer the WLE dataset</p>
+
+<p>Velloso, E.; Bulling, A.; Gellersen, H.; Ugulino, W.; Fuks, H. Qualitative Activity Recognition of Weight Lifting Exercises. Proceedings of 4th International Conference in Cooperation with SIGCHI (Augmented Human &#39;13) . Stuttgart, Germany: ACM SIGCHI, 2013.</p>
+
+</body>
+
+</html>
+
